@@ -86,8 +86,8 @@ button {
 
 .home-content {
   height: 100vh;
-  background: url("homebg.png") no-repeat center;
-  background-size: cover;
+  /*   background: url("homebg.png") no-repeat center;
+  background-size: cover; */
 }
 
 @layer components {
