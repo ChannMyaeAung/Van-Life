@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #161616;
+}
+
+/* Custom scrollbar */
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #ff8c38;
+  outline: 1px solid #ff8c38;
+}
+
+/* Content */
+nav {
+  background-color: #fff7ed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+button {
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-container {
+  width: 135px;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link {
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  letter-spacing: 2px;
+}
+
+.active-link {
+  position: relative;
+  display: inline-block; /* Allow padding to affect the inline box */
+}
+
+.active-link::after {
+  content: ""; /* Create the pseudo-element */
+  position: absolute;
+  left: 0;
+  bottom: 0px; /* Adjust this value to control the space between text and underline */
+  width: 100%;
+  height: 1.2px; /* Height of the underline */
+  background-color: #000; /* Adjust the color as needed */
+}
+
+.home-content {
+  height: 100vh;
+  background: url("homebg.png") no-repeat center;
+  background-size: cover;
+}
+
+@layer components {
+  .Cta-btn {
+    @apply text-[#161616] font-bold text-[24px] leading-[30px];
+  }
+}
