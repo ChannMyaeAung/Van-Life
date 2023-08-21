@@ -2,7 +2,7 @@ import { styles } from "../style";
 
 const About = () => {
   return (
-    <section className="flex flex-col gap-8" id="about">
+    <section className="flex flex-col gap-8 px-3" id="about">
       {/* Intro Image for About Page */}
       <figure>
         <img
@@ -13,7 +13,7 @@ const About = () => {
       </figure>
 
       {/* Description */}
-      <article className={`gap-5 px-10 ${styles.flexCenter} md:items-start`}>
+      <article className={`gap-5 ${styles.flexCenter} md:items-start`}>
         <h1 className="font-bold max-w-[500px] md:max-w-full text-[32px] leading-[38px]">
           Don't squeeze in a sedan when you could relax in a van.
         </h1>
@@ -30,7 +30,7 @@ const About = () => {
       </article>
       {/* CTA */}
       <article
-        className={`bg-[#FFCC8D] rounded-[5px] w-[500px] h-[200px] mx-auto flex flex-col items-start justify-evenly px-5 mt-5 mb-16`}
+        className={`bg-[#FFCC8D] rounded-[5px] w-full max-w-[500px] h-[200px] mx-auto flex flex-col items-start justify-evenly px-5 mt-5 mb-16`}
       >
         <div>
           <h2 className="Cta-btn">Your destination is waiting.</h2>

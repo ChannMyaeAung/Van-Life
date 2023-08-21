@@ -4,7 +4,7 @@ import { styles } from "../style";
 const Home = () => {
   return (
     <section>
-      <article className={`relative home-content ${styles.flexCenter}`}>
+      <article className={`relative h-screen ${styles.flexCenter}`}>
         {/* Background image & transparent overlay */}
         <div className="absolute h-full">
           <figure className="h-full">
@@ -15,11 +15,11 @@ const Home = () => {
             />
           </figure>
         </div>
-        <div className="absolute z-10 w-full h-full bg-Transparent"></div>
-
+        {/* transparent overlay */}
+        <div className="absolute z-10 w-full h-full bg-Transparent" />
         {/* Main Content */}
         <div className={`${styles.flexCenter} z-50 px-10 gap-5`}>
-          <h1 className="text-white text-[48px] font-bold">
+          <h1 className="text-white text-[32px] md:text-[48px] font-bold">
             You got the travel plans, we got the travel vans.
           </h1>
 
@@ -28,9 +28,7 @@ const Home = () => {
             the perfect van to make your perfect road trip.
           </p>
 
-          <button className="bg-orangePrimary w-full h-[50px] text-white rounded-[5px] font-semibold">
-            Find your van
-          </button>
+          <button className="primary__cta-btn">Find your van</button>
         </div>
       </article>
     </section>
