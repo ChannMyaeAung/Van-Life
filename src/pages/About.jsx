@@ -2,7 +2,7 @@ import { styles } from "../style";
 
 const About = () => {
   return (
-    <section className="flex flex-col gap-8 px-3" id="about">
+    <section className="flex flex-col gap-8 px-3 " id="about">
       {/* Intro Image for About Page */}
       <figure>
         <img

@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { navLinks } from "../data";
+import logo from "../assets/logo.png";
 
 const variants = {
   open: { opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.25 } },
@@ -21,7 +22,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className=" logo-container">
             <NavLink to="/">
-              <img src="logo.png" alt="" className="logo" />
+              <img src={logo} alt="logo" className="logo" />
             </NavLink>
           </div>
           {/* Nav Toggle Button */}
@@ -33,6 +34,11 @@ const Header = () => {
             <AiOutlineMenu size={22} />
           </button>
         </div>
+
+        {/* Transparent Overlay when the sidebar is open */}
+        {isNavOpen && (
+          <div className="fixed top-0 left-0 w-full h-full bg-black opacity-40 z-[100]" />
+        )}
 
         <motion.aside
           animate={isNavOpen ? "open" : "closed"}
@@ -55,6 +61,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   "nav-link" + (isActive ? " active-link" : "")
                 }
+                onClick={() => setIsNavOpen(false)}
               >
                 {navLink.title}
               </NavLink>
@@ -66,7 +73,7 @@ const Header = () => {
       <nav className="hidden md:flex">
         <div className="logo-container">
           <NavLink to="/">
-            <img src="logo.png" alt="" className="logo" />
+            <img src={logo} alt="logo" className="logo" />
           </NavLink>
         </div>
         <ul className="nav-links">

@@ -18,6 +18,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #161616;
+  background-color: #fff7ed;
+  height: 100vh;
 }
 
 /* Custom scrollbar */
@@ -74,6 +76,7 @@ button {
 }
 
 .active-link {
+  font-weight: 600;
   position: relative;
   display: inline-block; /* Allow padding to affect the inline box */
 }
@@ -98,7 +101,7 @@ button {
   }
 
   .primary__cta-btn {
-    @apply bg-orangePrimary w-full h-[50px] text-white rounded-[5px] font-semibold;
+    @apply bg-orangePrimary w-full md:w-1/2 md:mx-auto h-[50px] md:h-[60px] lg:h-[70px] md:text-[20px] lg:text-[28px] text-white rounded-[5px] font-semibold duration-200 hover:bg-white hover:text-orangePrimary;
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-const VanContext = createContext();
+const vanContext = createContext();
 
 export const VanProvider = ({ children }) => {
   const [vans, setVans] = useState([]);
@@ -11,7 +11,7 @@ export const VanProvider = ({ children }) => {
       .then((data) => setVans(data.vans));
   }, []);
 
-  return <VanContext.Provider value={vans}>{children}</VanContext.Provider>;
+  return <vanContext.Provider value={vans}>{children}</vanContext.Provider>;
 };
 
-export const useVanData = () => useContext(VanContext);
+export const useVanData = () => useContext(vanContext);

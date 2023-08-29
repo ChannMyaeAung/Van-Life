@@ -53,7 +53,7 @@ const Vans = () => {
     </article>
   ));
   return (
-    <section className="px-2 py-6 md:px-5 bg-[#fff7ed] h-full">
+    <section className="h-full px-2 py-6 md:px-5">
       <h1 id="van-heading" className=" font-bold text-[22px] md:text-[32px]">
         Explore our van options
       </h1>

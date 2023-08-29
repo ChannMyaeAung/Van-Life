@@ -18,12 +18,12 @@ const Home = () => {
         {/* transparent overlay */}
         <div className="absolute z-10 w-full h-full bg-Transparent" />
         {/* Main Content */}
-        <div className={`${styles.flexCenter} z-50 px-10 gap-5`}>
-          <h1 className="text-white text-[32px] md:text-[48px] font-bold">
+        <div className={`${styles.flexCenter} z-50 px-10 gap-5 md:gap-10`}>
+          <h1 className="text-white text-[32px] md:text-[42px] lg:text-[65px] font-bold">
             You got the travel plans, we got the travel vans.
           </h1>
 
-          <p className="mb-16 text-white opacity-90">
+          <p className="mb-16 text-white md:max-w-[80%] opacity-90 md:text-[24px] lg:text-[30px]">
             Add adventure to your life by joining the #vanlife movement. Rent
             the perfect van to make your perfect road trip.
           </p>
