@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import { styles } from "./style";
 import Vans from "./pages/Vans/Vans";
 import "./server";
 import VanDetail from "./pages/Vans/VanDetail";
@@ -11,7 +10,6 @@ import DashBoard from "./pages/Host/DashBoard";
 import Income from "./pages/Host/Income";
 import Reviews from "./pages/Host/Reviews";
 import HostLayout from "./components/HostLayout";
-import Footer from "./components/Footer";
 import HostVans from "./pages/Host/HostVans";
 import HostVanDetail from "./pages/Host/HostVanDetail";
 import HostVanInfo from "./pages/Host/HostVanInfo";
