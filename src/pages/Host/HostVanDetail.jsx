@@ -50,7 +50,10 @@ const HostVanDetail = () => {
             </figure>
 
             <div>
-              <span className={`van-type ${hostVan.type}`} id="van-type">
+              <span
+                className={`van-type ${hostVan.type} cursor-pointer`}
+                id="van-type"
+              >
                 {hostVan.type}
               </span>
               <h2 className="font-bold md:text-[26px] text-[15px]">

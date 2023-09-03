@@ -10,20 +10,13 @@ const Vans = () => {
 
   const vans = useVanData();
 
-  /* Van colors based on each type */
-  const vanColors = {
-    simple: { backgroundColor: "#e17654", color: "#ffead0" },
-    rugged: { backgroundColor: "#115e59", color: "#ffead0" },
-    luxury: { backgroundColor: "#222", color: "#ffead0" },
-  };
-
   const uniqueCategories = [...new Set(vans.map((van) => van.type))];
 
   const vanCategories = uniqueCategories.map((van, index) => (
     <article key={index} className="mr-2 last:mr-0 md:px-3 md:py-2 ">
       <button
         onClick={() => setSearchParams({ type: `${van}` })}
-        className={`van-type ${van}`}
+        className={`van-type ${van} ${van === typeFilter ? "selected" : ""}`}
       >
         {van}
       </button>
@@ -40,7 +33,7 @@ const Vans = () => {
       id="van-tile"
       className="flex flex-col items-start gap-2"
     >
-      <NavLink to={`/vans/${van.id}`}>
+      <NavLink to={van.id}>
         {/* Van Image */}
         <figure className="">
           <img
@@ -75,7 +68,7 @@ const Vans = () => {
 
       <div
         id="van-categories"
-        className={`mt-5 mb-8 flex items-center w-full justify-between`}
+        className={`mt-5 mb-8 flex flex-col md:flex-row gap-3 md:gap-0 items-start md:items-center w-full justify-between`}
       >
         <div className="flex flex-wrap items-start justify-start gap-1 md:items-center gap-y-3 md:gap-5">
           {vanCategories}

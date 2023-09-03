@@ -16,7 +16,7 @@ const HostVans = () => {
       <ul className="flex flex-col gap-3 mb-10">
         {hostVans?.map((hostVan) => (
           <NavLink
-            to={`/host/vans/${hostVan.id}`}
+            to={hostVan.id}
             key={hostVan.id}
             className={`flex gap-4 px-3 py-4 md:p-6 items-center bg-white border rounded-[6px]`}
           >
