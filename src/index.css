@@ -101,7 +101,7 @@ button {
   }
 
   .primary__cta-btn {
-    @apply bg-orangePrimary w-full md:w-1/2 md:mx-auto h-[50px] md:h-[60px] lg:h-[70px] md:text-[20px] lg:text-[28px] text-white rounded-[5px] font-semibold duration-200 hover:bg-white hover:text-orangePrimary;
+    @apply bg-orangePrimary w-full md:w-1/2 md:mx-auto h-[50px] md:h-[60px] lg:h-[70px] md:text-[20px] lg:text-[24px] text-white rounded-[5px] font-semibold duration-200 hover:bg-white hover:text-orangePrimary;
   }
 }
 
@@ -113,32 +113,43 @@ button {
   line-height: 31.66px;
   text-align: center;
   font-style: normal;
-  padding: 0.125rem 0.75rem;
+  padding: 6px 20px;
   border-radius: 5px;
   text-transform: capitalize;
+  background-color: #ffead0;
+  color: #4d4d4d;
+  transition: all 0.2s ease-in-out;
+}
+
+.van-type:hover {
+  color: #ffead0;
 }
 
 @media (min-width: 768px) {
   .van-type {
     font-size: 16px;
     position: relative;
-    top: -0.75rem;
-    padding: 0.5rem 0.85rem;
+    top: -0.5rem;
+    padding: 7px 26px;
   }
 }
 
+.van-type.selected {
+  color: #ffead0;
+}
+
 /* all van types */
-.simple {
+.van-type.simple:hover,
+.van-type.simple.selected {
   background-color: #e17654;
-  color: #ffead0;
 }
 
-.rugged {
+.van-type.rugged:hover,
+.van-type.rugged.selected {
   background-color: #115e59;
-  color: #ffead0;
 }
 
-.luxury {
+.van-type.luxury:hover,
+.van-type.luxury.selected {
   background-color: #222;
-  color: #ffead0;
 }

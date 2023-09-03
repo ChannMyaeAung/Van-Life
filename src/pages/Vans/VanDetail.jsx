@@ -23,12 +23,16 @@ const VanDetail = () => {
         </button>
       </Link>
       {van ? (
-        <article className="flex flex-col items-start gap-3 py-6">
+        <article className="flex flex-col items-start gap-3 py-6 md:gap-6 md:items-center md:justify-center">
           {/* Van Image */}
-          <figure>
-            <img src={van.imageUrl} alt="" />
+          <figure className="w-full mx-auto">
+            <img
+              src={van.imageUrl}
+              alt={van.name}
+              className="w-full md:w-[800px] md:h-[95%] mx-auto"
+            />
           </figure>
-          <i className={`van-type ${van.type}`} id="van-type">
+          <i className={`van-type md:top-[0.5rem] ${van.type}`} id="van-type">
             {van.type}
           </i>
           {/* Van Name */}
@@ -41,10 +45,13 @@ const VanDetail = () => {
             id="van-price"
           >
             ${van.price}{" "}
-            <span className="font-medium text-[14px] md:text-[18px]">/day</span>
+            <span className="font-medium text-[14px] md:text-[20px]">/day</span>
           </p>
           {/* Van Description */}
-          <p id="van-desc" className="text-[14px] md:text-[16px]">
+          <p
+            id="van-desc"
+            className="text-[14px] md:text-[18px] md:max-w-[600px] leading-[30px]"
+          >
             {van.description}
           </p>
 
