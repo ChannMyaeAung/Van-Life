@@ -33,7 +33,7 @@ const Vans = () => {
       id="van-tile"
       className="flex flex-col items-start gap-2"
     >
-      <NavLink to={van.id}>
+      <NavLink to={van.id} state={{ search: `?${searchParams.toString()}` }}>
         {/* Van Image */}
         <figure className="">
           <img

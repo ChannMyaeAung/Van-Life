@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 const VanDetail = () => {
   const params = useParams();
+
+  const location = useLocation();
+
+  console.log(location);
+
   const [van, setVan] = useState(null);
 
   useEffect(() => {
@@ -13,7 +18,7 @@ const VanDetail = () => {
 
   return (
     <section id="van-detail" className="px-3">
-      <Link to={`/vans`}>
+      <Link to={`..${location.state?.search}`} relative="path">
         <button
           id="back-to-all-vans"
           className="py-5 underline underline-offset-4 text-[14px] md:text-[16px] flex items-center justify-center gap-1"
