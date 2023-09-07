@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { styles } from "../style";
 const Home = () => {
   return (
@@ -28,7 +28,12 @@ const Home = () => {
             the perfect van to make your perfect road trip.
           </p>
 
-          <button className="primary__cta-btn">Find your van</button>
+          <NavLink
+            to={`vans`}
+            className={`${styles.flexCenter} flex-col primary__cta-btn`}
+          >
+            Find your van
+          </NavLink>
         </div>
       </article>
     </section>

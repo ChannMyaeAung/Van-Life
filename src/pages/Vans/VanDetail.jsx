@@ -18,13 +18,13 @@ const VanDetail = () => {
 
   return (
     <section id="van-detail" className="px-3">
-      <Link to={`..${location.state?.search}`} relative="path">
+      <Link to={`..${location.state?.search || ""}`} relative="path">
         <button
           id="back-to-all-vans"
           className="py-5 underline underline-offset-4 text-[14px] md:text-[16px] flex items-center justify-center gap-1"
         >
           <FaArrowLeftLong />
-          Back to all vans
+          <span>Back to {location.state?.type || "all"} vans</span>
         </button>
       </Link>
       {van ? (

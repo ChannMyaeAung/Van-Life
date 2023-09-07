@@ -5,10 +5,14 @@ const vanContext = createContext();
 export const VanProvider = ({ children }) => {
   const [vans, setVans] = useState([]);
 
+  const fetchData = async () => {
+    const res = await fetch(`/api/vans`);
+    const data = await res.json();
+    setVans(data.vans);
+  };
+
   useEffect(() => {
-    fetch("/api/vans")
-      .then((res) => res.json())
-      .then((data) => setVans(data.vans));
+    fetchData();
   }, []);
 
   return <vanContext.Provider value={vans}>{children}</vanContext.Provider>;

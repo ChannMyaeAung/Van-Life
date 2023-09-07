@@ -5,8 +5,6 @@ import { useHostVanData } from "./HostVanContext";
 const HostVans = () => {
   const hostVans = useHostVanData();
 
-  console.log(hostVans);
-
   return (
     <section id="host-vans" className="px-3 ">
       <h2 className="text-[24px] font-bold md:text-[32px] mb-5">

@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { styles } from "../../style";
-import { Link, NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useLoaderData, useSearchParams } from "react-router-dom";
 import { useVanData } from "./VanContext";
+import { getVans } from "../../api";
+
+export function loader() {
+  return getVans();
+}
 
 const Vans = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const typeFilter = searchParams.get("type");
 
-  const vans = useVanData();
+  /* const vans = useVanData(); */
+
+  const vans = useLoaderData();
 
   const uniqueCategories = [...new Set(vans.map((van) => van.type))];
 
@@ -33,7 +40,10 @@ const Vans = () => {
       id="van-tile"
       className="flex flex-col items-start gap-2"
     >
-      <NavLink to={van.id} state={{ search: `?${searchParams.toString()}` }}>
+      <NavLink
+        to={van.id}
+        state={{ search: `?${searchParams.toString()}`, type: typeFilter }} //state for useLocation
+      >
         {/* Van Image */}
         <figure className="">
           <img

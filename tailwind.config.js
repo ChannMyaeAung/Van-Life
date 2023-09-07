@@ -7,6 +7,7 @@ export default {
         Transparent: "rgba(0, 0, 0, 0.35)",
         orangePrimary: "#FF8C38",
         primaryBG: "#fff7ed",
+        primaryBlack: "#161616",
       },
     },
   },
