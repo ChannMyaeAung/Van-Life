@@ -4,6 +4,7 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { navLinks } from "../data";
 import logo from "../assets/logo.png";
+import avatarIcon from "../assets/avatar-icon.png";
 
 const variants = {
   open: { opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.25 } },
@@ -54,6 +55,7 @@ const Header = () => {
               <AiOutlineClose size={22} color="red" />
             </button>
 
+            {/* All NavLinks except Login/SignIn */}
             {navLinks.map((navLink) => (
               <NavLink
                 key={navLink.id}
@@ -66,6 +68,15 @@ const Header = () => {
                 {navLink.title}
               </NavLink>
             ))}
+
+            {/* Login/SignIn */}
+            <NavLink
+              onClick={() => setIsNavOpen(false)}
+              to={`/login`}
+              className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
+            >
+              Login
+            </NavLink>
           </ul>
         </motion.aside>
       </nav>
@@ -88,6 +99,13 @@ const Header = () => {
               {navLink.title}
             </NavLink>
           ))}
+          {/* Login */}
+          <NavLink
+            to={`/login`}
+            className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
+          >
+            <img src={avatarIcon} alt="avatar icon" className="object-cover" />
+          </NavLink>
         </ul>
       </nav>
     </header>
