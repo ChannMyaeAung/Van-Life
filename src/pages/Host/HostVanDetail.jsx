@@ -1,8 +1,18 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { Link, NavLink, Outlet, useOutlet, useParams } from "react-router-dom";
-import { styles } from "../../style";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLoaderData,
+  useParams,
+} from "react-router-dom";
 import { hostVansData } from "../../data";
+import { getHostVans } from "../../api";
+
+export function loader({ params }) {
+  return getHostVans(params.id);
+}
 
 const HostVanDetail = () => {
   /* active styles for link tabs */
@@ -12,16 +22,7 @@ const HostVanDetail = () => {
     color: "#161616",
   };
 
-  const params = useParams();
-
-  const [hostVan, setHostVan] = useState(null);
-
-  /* getting van data from server.js */
-  useEffect(() => {
-    fetch(`/api/vans/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setHostVan(data.vans));
-  }, [params.id]);
+  const hostVan = useLoaderData();
 
   return (
     <section id="hostvan-detail" className="px-3 border">

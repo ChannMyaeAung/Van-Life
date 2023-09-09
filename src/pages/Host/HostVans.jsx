@@ -1,9 +1,15 @@
 import React from "react";
 import { useVanData } from "../Vans/VanContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 import { useHostVanData } from "./HostVanContext";
+import { getHostVans } from "../../api";
+
+export function loader() {
+  return getHostVans();
+}
+
 const HostVans = () => {
-  const hostVans = useHostVanData();
+  const hostVans = useLoaderData();
 
   return (
     <section id="host-vans" className="px-3 ">
