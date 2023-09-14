@@ -1,16 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLoaderData,
-  useParams,
-} from "react-router-dom";
+import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
 import { hostVansData } from "../../data";
 import { getHostVans } from "../../api";
+import { requireAuth } from "../../utils";
 
-export function loader({ params }) {
+export async function loader({ params }) {
+  await requireAuth();
   return getHostVans(params.id);
 }
 

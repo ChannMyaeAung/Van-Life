@@ -1,10 +1,9 @@
 import React from "react";
-import { useVanData } from "../Vans/VanContext";
 import { NavLink, useLoaderData } from "react-router-dom";
-import { useHostVanData } from "./HostVanContext";
 import { getHostVans } from "../../api";
+import { requireAuth } from "../../utils";
 
-export function loader() {
+export async function loader() {
   return getHostVans();
 }
 

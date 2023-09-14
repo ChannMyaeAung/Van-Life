@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
 import { styles } from "../style";
+import { loginUser } from "../api";
+export function loader({ request }) {
+  return new URL(request.url).searchParams.get("message");
+}
 
 const Login = () => {
   const [loginFormData, setLoginFormData] = useState({
@@ -8,9 +12,23 @@ const Login = () => {
     password: "",
   });
 
+  const [status, setStatus] = useState("idle");
+
+  const [error, setError] = useState(null);
+
+  const message = useLoaderData();
+
+  const navigate = useNavigate();
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(loginFormData);
+    setStatus("submitting");
+    loginUser(loginFormData)
+      .then((data) => {
+        navigate("/host", { replace: true });
+      })
+      .catch((err) => setError(err))
+      .finally(() => setStatus("idle"));
   }
 
   function handleChange(e) {
@@ -29,6 +47,20 @@ const Login = () => {
       <h1 className="font-bold text-center text-primaryBlack text-[23px] md:text-[32px] pt-10 pb-6 leading-[24px]">
         Sign in to your account
       </h1>
+
+      <p>{status}</p>
+
+      {message && (
+        <h3 className="text-[18px] md:text-[21px] text-red-500 font-semibold mb-3">
+          {message}!
+        </h3>
+      )}
+
+      {error && (
+        <h3 className="text-center text-[18px] md:text-[21px] text-red-500 font-semibold mb-3">
+          {error.message}
+        </h3>
+      )}
 
       <form onSubmit={handleSubmit} className="flex flex-col w-full px-3">
         {/* Vanilla CSS is used for styling inputs */}
@@ -50,7 +82,13 @@ const Login = () => {
           value={loginFormData.password}
         />
 
-        <button className={`primary__cta-btn my-6`}>Log in</button>
+        <button
+          disabled={status === "submitting"}
+          className={`primary__cta-btn my-6`}
+          type="submit"
+        >
+          {status === "submitting" ? "Logging In..." : "Log in"}
+        </button>
 
         {/* Redirect to SignUp Page */}
         <div id="redirect__to_signup">
