@@ -1,17 +1,37 @@
-import React, { useState } from "react";
-import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  Form,
+  NavLink,
+  redirect,
+  useLoaderData,
+  useNavigate,
+} from "react-router-dom";
 import { styles } from "../style";
 import { loginUser } from "../api";
+
+/* Loader Function */
 export function loader({ request }) {
   return new URL(request.url).searchParams.get("message");
 }
 
-const Login = () => {
-  const [loginFormData, setLoginFormData] = useState({
-    email: "",
-    password: "",
-  });
+/* Action function */
+export async function action({ request }) {
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const password = formData.get("password");
 
+  const data = await loginUser({ email, password });
+
+  localStorage.setItem("loggedin", true);
+
+  /* Redirecting user to host dashboard after logging in */
+  const response = redirect("/host");
+  response.body = true;
+  return response;
+}
+
+/* Main Login Component goes here */
+const Login = () => {
   const [status, setStatus] = useState("idle");
 
   const [error, setError] = useState(null);
@@ -29,14 +49,6 @@ const Login = () => {
       })
       .catch((err) => setError(err))
       .finally(() => setStatus("idle"));
-  }
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setLoginFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
   }
 
   return (
@@ -62,24 +74,20 @@ const Login = () => {
         </h3>
       )}
 
-      <form onSubmit={handleSubmit} className="flex flex-col w-full px-3">
+      <Form method="post" className="flex flex-col w-full px-3" replace>
         {/* Vanilla CSS is used for styling inputs */}
         <input
           type="email"
-          onChange={handleChange}
           name="email"
           className="login__input"
           placeholder="Email address"
-          value={loginFormData.email}
         />
 
         <input
           type="password"
-          onChange={handleChange}
           name="password"
           className="login__input"
           placeholder="Password"
-          value={loginFormData.password}
         />
 
         <button
@@ -99,7 +107,7 @@ const Login = () => {
             </NavLink>
           </p>
         </div>
-      </form>
+      </Form>
     </div>
   );
 };
