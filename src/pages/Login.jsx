@@ -3,8 +3,10 @@ import {
   Form,
   NavLink,
   redirect,
+  useActionData,
   useLoaderData,
   useNavigate,
+  useNavigation,
 } from "react-router-dom";
 import { styles } from "../style";
 import { loginUser } from "../api";
@@ -20,36 +22,30 @@ export async function action({ request }) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const data = await loginUser({ email, password });
+  const pathname =
+    new URL(request.url).searchParams.get("redirectTo") || "/host";
 
-  localStorage.setItem("loggedin", true);
+  try {
+    const data = await loginUser({ email, password });
 
-  /* Redirecting user to host dashboard after logging in */
-  const response = redirect("/host");
-  response.body = true;
-  return response;
+    localStorage.setItem("loggedin", true);
+
+    /* Redirecting user to host dashboard after logging in */
+    const response = redirect(pathname);
+    response.body = true;
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 /* Main Login Component goes here */
 const Login = () => {
-  const [status, setStatus] = useState("idle");
+  const statusNavigate = useNavigation();
 
-  const [error, setError] = useState(null);
+  const errorMessage = useActionData();
 
   const message = useLoaderData();
-
-  const navigate = useNavigate();
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("submitting");
-    loginUser(loginFormData)
-      .then((data) => {
-        navigate("/host", { replace: true });
-      })
-      .catch((err) => setError(err))
-      .finally(() => setStatus("idle"));
-  }
 
   return (
     <div
@@ -60,7 +56,7 @@ const Login = () => {
         Sign in to your account
       </h1>
 
-      <p>{status}</p>
+      <p>{statusNavigate.state}</p>
 
       {message && (
         <h3 className="text-[18px] md:text-[21px] text-red-500 font-semibold mb-3">
@@ -68,9 +64,9 @@ const Login = () => {
         </h3>
       )}
 
-      {error && (
+      {errorMessage && (
         <h3 className="text-center text-[18px] md:text-[21px] text-red-500 font-semibold mb-3">
-          {error.message}
+          {errorMessage}
         </h3>
       )}
 
@@ -91,11 +87,11 @@ const Login = () => {
         />
 
         <button
-          disabled={status === "submitting"}
-          className={`primary__cta-btn my-6`}
+          disabled={statusNavigate.state === "submitting"}
+          className={`primary__cta-btn my-6 disabled:bg-[#aaa] disabled:text-white disabled:cursor-not-allowed`}
           type="submit"
         >
-          {status === "submitting" ? "Logging In..." : "Log in"}
+          {statusNavigate.state === "submitting" ? "Logging In..." : "Log in"}
         </button>
 
         {/* Redirect to SignUp Page */}
