@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { styles } from "../../style";
 import {
   Await,
@@ -128,7 +128,11 @@ const Vans = () => {
         Explore our van options
       </h1>
 
-      <Await resolve={dataPromise.vans}>{renderVanElements}</Await>
+      <Suspense
+        fallback={<h2 className={`${styles.loading}`}>Loading vans...</h2>}
+      >
+        <Await resolve={dataPromise.vans}>{renderVanElements}</Await>
+      </Suspense>
     </section>
   );
 };
