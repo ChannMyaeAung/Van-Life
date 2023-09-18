@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Await, NavLink, defer, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../api";
 import { requireAuth } from "../../utils";
+import { styles } from "../../style";
 
 export async function loader({ request }) {
   await requireAuth(request);
@@ -51,7 +52,11 @@ const HostVans = () => {
         Your listed vans
       </h2>
 
-      <Await resolve={dataPromise.hostVans}>{renderHostVans}</Await>
+      <Suspense
+        fallback={<h2 className={`${styles.loading}`}>Loading host vans...</h2>}
+      >
+        <Await resolve={dataPromise.hostVans}>{renderHostVans}</Await>
+      </Suspense>
     </section>
   );
 };
