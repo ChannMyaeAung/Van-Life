@@ -1,22 +1,19 @@
 import React from "react";
-import { NavLink, useLoaderData } from "react-router-dom";
+import { Await, NavLink, defer, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../api";
 import { requireAuth } from "../../utils";
 
 export async function loader({ request }) {
   await requireAuth(request);
-  return getHostVans();
+  return defer({ hostVans: getHostVans() });
 }
 
 const HostVans = () => {
-  const hostVans = useLoaderData();
+  const dataPromise = useLoaderData();
 
-  return (
-    <section id="host-vans" className="px-3 ">
-      <h2 className="text-[24px] font-bold md:text-[32px] mb-5">
-        Your listed vans
-      </h2>
-
+  /* function for rendering hostVans of the user */
+  function renderHostVans(hostVans) {
+    return (
       <ul className="flex flex-col gap-3 mb-10">
         {hostVans?.map((hostVan) => (
           <NavLink
@@ -44,6 +41,17 @@ const HostVans = () => {
           </NavLink>
         ))}
       </ul>
+    );
+  }
+
+  /* Main HostVans Component */
+  return (
+    <section id="host-vans" className="px-3 ">
+      <h2 className="text-[24px] font-bold md:text-[32px] mb-5">
+        Your listed vans
+      </h2>
+
+      <Await resolve={dataPromise.hostVans}>{renderHostVans}</Await>
     </section>
   );
 };
