@@ -2,7 +2,10 @@ import { styles } from "../style";
 
 const About = () => {
   return (
-    <section className="flex flex-col gap-8 px-3 " id="about">
+    <section
+      className={`flex max-w-[1000px] mx-auto flex-col gap-8 ${styles.paddingX} md:items-center md:justify-center`}
+      id="about"
+    >
       {/* Intro Image for About Page */}
       <figure>
         <img
@@ -28,9 +31,10 @@ const About = () => {
           of touring the world on 4 wheels.
         </p>
       </article>
+
       {/* CTA */}
       <article
-        className={`bg-[#FFCC8D] rounded-[5px] w-full max-w-[500px] h-[200px] mx-auto flex flex-col items-start justify-evenly px-5 mt-5 mb-16`}
+        className={`bg-[#FFCC8D] md:mx-0 self-start rounded-[5px] w-full max-w-[500px] h-[200px] mx-auto flex flex-col items-start justify-evenly px-5 mt-5 mb-16`}
       >
         <div>
           <h2 className="Cta-btn">Your destination is waiting.</h2>
