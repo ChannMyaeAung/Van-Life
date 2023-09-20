@@ -30,7 +30,7 @@ export async function action({ request }) {
 
     localStorage.setItem("loggedin", true);
 
-    /* Redirecting user to host dashboard after logging in */
+    /* Redirecting user to previous visited page after logging in */
     const response = redirect(pathname);
     response.body = true;
     return response;
@@ -55,8 +55,6 @@ const Login = () => {
       <h1 className="font-bold text-center text-primaryBlack text-[23px] md:text-[32px] pt-10 pb-6 leading-[24px]">
         Sign in to your account
       </h1>
-
-      <p>{statusNavigate.state}</p>
 
       {message && (
         <h3 className="text-[18px] md:text-[21px] text-red-500 font-semibold mb-3">

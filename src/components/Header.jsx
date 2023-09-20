@@ -99,8 +99,11 @@ const Header = () => {
               {navLink.title}
             </NavLink>
           ))}
-          {/* Login */}
+
+          {/* Login/SignIn */}
+
           <NavLink
+            onClick={() => setIsNavOpen(false)}
             to={`/login`}
             className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
           >

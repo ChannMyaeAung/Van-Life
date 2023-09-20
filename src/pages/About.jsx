@@ -16,7 +16,7 @@ const About = () => {
       </figure>
 
       {/* Description */}
-      <article className={`gap-5 ${styles.flexCenter} md:items-start`}>
+      <article className={`gap-5 ${styles.flexColumnCenter} md:items-start`}>
         <h1 className="font-bold max-w-[500px] md:max-w-full text-[32px] leading-[38px]">
           Don't squeeze in a sedan when you could relax in a van.
         </h1>
