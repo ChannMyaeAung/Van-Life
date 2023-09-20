@@ -1,30 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLoaderData, useLocation, useParams } from "react-router-dom";
+import React, { Suspense, useEffect, useState } from "react";
+import {
+  Await,
+  Link,
+  defer,
+  useLoaderData,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { getVans } from "../../api";
+import { styles } from "../../style";
 
 export function loader({ params }) {
-  return getVans(params.id);
+  return defer({ vans: getVans(params.id) });
 }
 
 const VanDetail = () => {
   const location = useLocation();
 
-  const van = useLoaderData();
+  const dataPromise = useLoaderData();
 
-  return (
-    <section id="van-detail" className="px-3">
-      <Link to={`..${location.state?.search || ""}`} relative="path">
-        <button
-          id="back-to-all-vans"
-          className="py-5 underline underline-offset-4 text-[14px] md:text-[16px] flex items-center justify-center gap-1"
-        >
-          <FaArrowLeftLong />
-          <span>Back to {location.state?.type || "all"} vans</span>
-        </button>
-      </Link>
-
-      <article className="flex flex-col items-start gap-3 py-6 md:gap-6 md:items-center md:justify-center">
+  function renderVanDetail(van) {
+    return (
+      <>
         {/* Van Image */}
         <figure className="w-full mx-auto">
           <img
@@ -57,6 +55,30 @@ const VanDetail = () => {
         <button id="rent-btn" type="button" className="primary__cta-btn">
           Rent this van
         </button>
+      </>
+    );
+  }
+
+  return (
+    <section id="van-detail" className="px-3">
+      <Link to={`..${location.state?.search || ""}`} relative="path">
+        <button
+          id="back-to-all-vans"
+          className="py-5 underline underline-offset-4 text-[14px] md:text-[16px] flex items-center justify-center gap-1"
+        >
+          <FaArrowLeftLong />
+          <span>Back to {location.state?.type || "all"} vans</span>
+        </button>
+      </Link>
+
+      <article className="flex flex-col items-start gap-3 py-6 md:gap-6 md:items-center md:justify-center">
+        <Suspense
+          fallback={<h2 className={`${styles.loading}`}>Loading...</h2>}
+        >
+          <Await resolve={dataPromise.vans}>
+            {(van) => renderVanDetail(van)}
+          </Await>
+        </Suspense>
       </article>
     </section>
   );

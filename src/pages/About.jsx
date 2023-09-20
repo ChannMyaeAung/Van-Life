@@ -11,7 +11,7 @@ const About = () => {
         <img
           src="about.png"
           alt="a person relaxing on a van's roof"
-          className="object-cover w-full"
+          className="object-cover w-full aspect-[16/9]"
         />
       </figure>
 

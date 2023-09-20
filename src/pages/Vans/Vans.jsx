@@ -90,7 +90,7 @@ const Vans = () => {
       </article>
     ));
 
-    /* Main Layout */
+    /* Rendering the categories and the vans */
     return (
       <>
         <div
