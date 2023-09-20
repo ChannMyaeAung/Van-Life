@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { requireAuth } from "../../utils";
-import { NavLink, defer, useLoaderData } from "react-router-dom";
+import { Await, NavLink, defer, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../api";
 import { BsStarFill } from "react-icons/bs";
 import { dashBoardStyles, styles } from "../../style";
@@ -13,7 +13,31 @@ export async function loader({ request }) {
 const DashBoard = () => {
   const loaderData = useLoaderData();
 
-  function renderVanElements(vans) {}
+  /* Function for rendering listed vans to wrap inside Await */
+  function renderVanElements(vans) {
+    const hostVansEls = vans.map((van) => (
+      <div className="flex flex-col items-start justify-between p-2 mt-3 bg-white md:mt-5 md:items-center md:flex-row">
+        <div className="flex items-start gap-3 md:items-center">
+          <figure className="w-[66px] h-[66px]">
+            <img src={van.imageUrl} alt={van.name} className="rounded-[5px]" />
+          </figure>
+          <div>
+            <h3 className="font-semibold text-[18px] md:text-[20px]">
+              {van.name}
+            </h3>
+            <p className={`${dashBoardStyles.paragraph}`}>${van.price}/day</p>
+          </div>
+        </div>
+        <NavLink
+          to={`vans/${van.id}`}
+          className={`self-end md:self-center ${dashBoardStyles.paragraph}`}
+        >
+          Edit
+        </NavLink>
+      </div>
+    ));
+    return <>{hostVansEls}</>;
+  }
 
   return (
     <section id="dashboard">
@@ -69,7 +93,7 @@ const DashBoard = () => {
 
       {/* User Listed Vans section */}
 
-      <section className="mx-3 my-5 border">
+      <section className="mx-3 my-5 md:mx-5 md:my-7">
         <header className="flex items-center justify-between">
           <h1 className="font-bold text-[18px] md:text-[24px]">
             Your listed vans
@@ -78,6 +102,12 @@ const DashBoard = () => {
             View all
           </NavLink>
         </header>
+        {/* All Listed Vans */}
+        <Suspense
+          fallback={<h2 className={`${styles.loading}`}>Loading vans...</h2>}
+        >
+          <Await resolve={loaderData.vans}>{renderVanElements}</Await>
+        </Suspense>
       </section>
     </section>
   );

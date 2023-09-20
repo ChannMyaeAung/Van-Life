@@ -9,4 +9,5 @@ export const styles = {
 
 export const dashBoardStyles = {
   paragraph: `font-medium text-[#4D4D4D] text-[14px] md:text-[16px]`,
+  vanTitle: ``,
 };
