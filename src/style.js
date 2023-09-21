@@ -7,7 +7,8 @@ export const styles = {
   loading: `flex mt-10 items-center justify-center font-bold text-[25px] md:text-[30px]`,
 };
 
-export const dashBoardStyles = {
+export const hostComponentStyles = {
   paragraph: `font-medium text-[#4D4D4D] text-[14px] md:text-[16px]`,
-  vanTitle: ``,
+  margin: `mx-3 my-5 md:mx-5 md:my-7`,
+  padding: `px-3 py-5 md:px-4 md:py-6`,
 };

@@ -3,7 +3,7 @@ import { requireAuth } from "../../utils";
 import { Await, NavLink, defer, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../api";
 import { BsStarFill } from "react-icons/bs";
-import { dashBoardStyles, styles } from "../../style";
+import { hostComponentStyles, styles } from "../../style";
 
 export async function loader({ request }) {
   await requireAuth(request);
@@ -25,14 +25,16 @@ const DashBoard = () => {
             <h3 className="font-semibold text-[18px] md:text-[20px]">
               {van.name}
             </h3>
-            <p className={`${dashBoardStyles.paragraph}`}>${van.price}/day</p>
+            <p className={`${hostComponentStyles.paragraph}`}>
+              ${van.price}/day
+            </p>
           </div>
         </div>
         <NavLink
           to={`vans/${van.id}`}
-          className={`self-end md:self-center ${dashBoardStyles.paragraph}`}
+          className={`self-end md:self-center ${hostComponentStyles.paragraph}`}
         >
-          Edit
+          View
         </NavLink>
       </div>
     ));
@@ -52,7 +54,7 @@ const DashBoard = () => {
         >
           <h1 className="font-bold md:text-[36px] text-[30px] ">Welcome!</h1>
           <div
-            className={`text-[#4D4D4D] ${dashBoardStyles.paragraph} flex justify-between items-center`}
+            className={`text-[#4D4D4D] ${hostComponentStyles.paragraph} flex justify-between items-center`}
           >
             <p>
               Income last <span className="font-bold underline">30 days</span>
@@ -86,19 +88,19 @@ const DashBoard = () => {
           </div>
         </div>
         {/* NavLink to review section */}
-        <NavLink to={`review`} className={`${dashBoardStyles.paragraph}`}>
+        <NavLink to={`review`} className={`${hostComponentStyles.paragraph}`}>
           Details
         </NavLink>
       </section>
 
       {/* User Listed Vans section */}
 
-      <section className="mx-3 my-5 md:mx-5 md:my-7">
+      <section className={`${hostComponentStyles.margin}`}>
         <header className="flex items-center justify-between">
           <h1 className="font-bold text-[18px] md:text-[24px]">
             Your listed vans
           </h1>
-          <NavLink to={`vans`} className={`${dashBoardStyles.paragraph}`}>
+          <NavLink to={`vans`} className={`${hostComponentStyles.paragraph}`}>
             View all
           </NavLink>
         </header>
