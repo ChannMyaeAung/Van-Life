@@ -12,13 +12,13 @@ const Income = () => {
   return (
     <section id="income">
       {/* Income Info and Graph Section */}
-      <section id="income__top" className={`px-3 flex flex-col gap-3`}>
-        <h1 className="font-bold text-[26px] md:-text[36px]">Income</h1>
+      <section id="income__top" className={`px-4 flex flex-col gap-3`}>
+        <h1 className="font-bold text-[28px] md:-text[36px]">Income</h1>
         <p className={`${hostComponentStyles.paragraph}`}>
           Last <span className="font-bold underline">30 days</span>
         </p>
         <h2 className="font-extrabold text-[32px] md:text-[40px]">$2,260</h2>
-        <figure className="w-full">
+        <figure className="w-full max-w-[500px]">
           <img src={incomeGraph} alt="income-graph" />
         </figure>
       </section>
