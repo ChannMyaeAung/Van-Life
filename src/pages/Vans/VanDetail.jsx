@@ -8,11 +8,11 @@ import {
   useParams,
 } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { getVans } from "../../api";
+import { getVan } from "../../api";
 import { styles } from "../../style";
 
 export function loader({ params }) {
-  return defer({ vans: getVans(params.id) });
+  return defer({ vans: getVan(params.id) });
 }
 
 const VanDetail = () => {

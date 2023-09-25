@@ -9,13 +9,13 @@ import {
   useLoaderData,
 } from "react-router-dom";
 import { hostVansData } from "../../data";
-import { getHostVans } from "../../api";
+import { getVan } from "../../api";
 import { requireAuth } from "../../utils";
 import { styles } from "../../style";
 
 export async function loader({ params, request }) {
   await requireAuth(request);
-  return defer({ vans: getHostVans(params.id) });
+  return defer({ vans: getVan(params.id) });
 }
 
 const HostVanDetail = () => {

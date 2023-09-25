@@ -14,3 +14,9 @@ export async function requireAuth(request) {
   }
   return null;
 }
+
+/* if (!isLoggedIn) {
+    throw redirect(
+      `/login?message=You must log in first.&redirectTo=${pathname}`
+    );
+  } */

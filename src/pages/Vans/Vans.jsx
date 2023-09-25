@@ -66,6 +66,7 @@ const Vans = () => {
             <img
               src={van.imageUrl}
               alt="van images"
+              loading="lazy"
               className="rounded-[5px] aspect-[1/1]"
             />
           </figure>
