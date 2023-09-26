@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { styles } from "../style";
 
 const About = () => {
@@ -40,9 +41,12 @@ const About = () => {
           <h2 className="Cta-btn">Your destination is waiting.</h2>
           <h3 className="Cta-btn">Your van is ready.</h3>
         </div>
-        <button className="w-[174px] h-[49px] bg-[#161616] text-white rounded-[10px] hover:bg-white hover:text-[#161616]">
+        <NavLink
+          to={`/vans`}
+          className=" text-center py-3 px-5 bg-[#161616] text-white rounded-[10px] hover:bg-white hover:text-[#161616]"
+        >
           Explore our vans
-        </button>
+        </NavLink>
       </article>
     </section>
   );

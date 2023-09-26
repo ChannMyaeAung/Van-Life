@@ -5,6 +5,7 @@ export const styles = {
   section: `py-8 px-6`,
   paragraphOne: `font-medium leading-[22px] max-w-[500px] md:max-w-full`,
   loading: `flex mt-10 items-center justify-center font-bold text-[25px] md:text-[30px]`,
+  button: `text-center px-5 py-1 rounded-md bg-orangePrimary text-white outline-none border-none duration-200 hover:bg-white hover:text-orangePrimary`,
 };
 
 export const hostComponentStyles = {

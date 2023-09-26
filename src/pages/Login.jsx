@@ -5,11 +5,11 @@ import {
   redirect,
   useActionData,
   useLoaderData,
-  useNavigate,
   useNavigation,
 } from "react-router-dom";
 import { styles } from "../style";
-import { loginUser } from "../api";
+import { auth } from "../api";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 /* Loader Function */
 export function loader({ request }) {
@@ -26,16 +26,17 @@ export async function action({ request }) {
     new URL(request.url).searchParams.get("redirectTo") || "/host";
 
   try {
-    const data = await loginUser({ email, password });
-
+    await signInWithEmailAndPassword(auth, email, password);
     localStorage.setItem("loggedin", true);
 
     /* Redirecting user to previous visited page after logging in */
     const response = redirect(pathname);
-    response.body = true;
+
     return response;
   } catch (err) {
-    console.log(err);
+    throw new Error(
+      "Authentication failed! Could not find the user with this email and password!"
+    );
   }
 }
 

@@ -28,8 +28,12 @@ import Login, {
   loader as loginLoader,
   action as loginAction,
 } from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import SignUp, {
+  loader as signupLoader,
+  action as signupAction,
+} from "./pages/SignUp";
 import { requireAuth } from "./utils";
+import Signout from "./pages/Signout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,8 +46,16 @@ const router = createBrowserRouter(
         element={<Login />}
         loader={loginLoader}
         action={loginAction}
+        errorElement={<Error />}
       />
-      <Route path="signup" element={<SignUp />} />
+      <Route
+        path="signup"
+        element={<SignUp />}
+        loader={signupLoader}
+        action={signupAction}
+      />
+
+      <Route path="signout" element={<Signout />} />
 
       <Route path="/vans">
         <Route

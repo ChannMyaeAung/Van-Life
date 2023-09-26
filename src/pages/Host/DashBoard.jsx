@@ -16,7 +16,10 @@ const DashBoard = () => {
   /* Function for rendering listed vans to wrap inside Await */
   function renderVanElements(vans) {
     const hostVansEls = vans.map((van) => (
-      <div className="flex flex-col items-start justify-between p-2 mt-3 bg-white md:mt-5 md:items-center md:flex-row">
+      <div
+        key={van.id}
+        className="flex flex-col items-start justify-between p-2 mt-3 bg-white md:mt-5 md:items-center md:flex-row"
+      >
         <div className="flex items-start gap-3 md:items-center">
           <figure className="w-[66px] h-[66px]">
             <img src={van.imageUrl} alt={van.name} className="rounded-[5px]" />
@@ -88,7 +91,7 @@ const DashBoard = () => {
           </div>
         </div>
         {/* NavLink to review section */}
-        <NavLink to={`review`} className={`${hostComponentStyles.paragraph}`}>
+        <NavLink to={`reviews`} className={`${hostComponentStyles.paragraph}`}>
           Details
         </NavLink>
       </section>

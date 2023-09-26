@@ -1,4 +1,4 @@
-// Import the functions you need from the SDKs you need
+// Import the functions from the SDKs
 import { initializeApp } from "firebase/app";
 import {
   collection,
@@ -9,6 +9,7 @@ import {
   query,
   where,
 } from "firebase/firestore/lite";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyADoWlOOTtF_0YOA9DRTA9z4s_YKMOCfL0",
@@ -22,6 +23,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+export const auth = getAuth(app);
 
 const vansCollectionRef = collection(db, "vans");
 
@@ -31,7 +33,6 @@ export async function getVans() {
     ...doc.data(),
     id: doc.id,
   }));
-
   return dataArr;
 }
 
@@ -56,21 +57,17 @@ export async function getHostVans() {
   return dataArr;
 }
 
-export async function loginUser(creds) {
-  const res = await fetch("/api/login", {
-    method: "post",
-    body: JSON.stringify(creds),
-  });
+export async function loginUser(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw {
-      message: data.message,
-      statusText: res.statusText,
-      status: res.status,
-    };
+    return { user: userCredential.user };
+  } catch (err) {
+    console.log("Authentication failed: ", err);
+    throw { message: "Authentication failed" };
   }
-
-  return data;
 }

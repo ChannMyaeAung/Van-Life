@@ -77,6 +77,14 @@ const Header = () => {
             >
               Login
             </NavLink>
+
+            <NavLink
+              onClick={() => setIsNavOpen(false)}
+              to={`/signout`}
+              className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
+            >
+              Sign Out
+            </NavLink>
           </ul>
         </motion.aside>
       </nav>
@@ -108,6 +116,14 @@ const Header = () => {
             className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
           >
             <img src={avatarIcon} alt="avatar icon" className="object-cover" />
+          </NavLink>
+
+          <NavLink
+            onClick={() => setIsNavOpen(false)}
+            to={`/signout`}
+            className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
+          >
+            Sign Out
           </NavLink>
         </ul>
       </nav>
