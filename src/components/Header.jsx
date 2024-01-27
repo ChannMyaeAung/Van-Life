@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
@@ -13,6 +13,10 @@ const variants = {
 
 const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("loggedin")
+  );
 
   return (
     <header>
@@ -70,21 +74,30 @@ const Header = () => {
             ))}
 
             {/* Login/SignIn */}
-            <NavLink
-              onClick={() => setIsNavOpen(false)}
-              to={`/login`}
-              className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
-            >
-              Login
-            </NavLink>
 
-            <NavLink
-              onClick={() => setIsNavOpen(false)}
-              to={`/signout`}
-              className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
-            >
-              Sign Out
-            </NavLink>
+            {isLoggedIn ? (
+              <NavLink
+                key={isLoggedIn}
+                onClick={() => setIsNavOpen(false)}
+                to={`/signout`}
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active-link" : "")
+                }
+              >
+                Sign Out
+              </NavLink>
+            ) : (
+              <NavLink
+                key={isLoggedIn}
+                onClick={() => setIsNavOpen(false)}
+                to={`/login`}
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active-link" : "")
+                }
+              >
+                Login
+              </NavLink>
+            )}
           </ul>
         </motion.aside>
       </nav>
@@ -110,21 +123,29 @@ const Header = () => {
 
           {/* Login/SignIn */}
 
-          <NavLink
-            onClick={() => setIsNavOpen(false)}
-            to={`/login`}
-            className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
-          >
-            <img src={avatarIcon} alt="avatar icon" className="object-cover" />
-          </NavLink>
-
-          <NavLink
-            onClick={() => setIsNavOpen(false)}
-            to={`/signout`}
-            className={`w-[25px] h-[25px] duration-200 hover:scale-105`}
-          >
-            Sign Out
-          </NavLink>
+          {isLoggedIn ? (
+            <NavLink
+              key={isLoggedIn}
+              onClick={() => setIsNavOpen(false)}
+              to={`/signout`}
+              className={({ isActive }) =>
+                "nav-link" + (isActive ? " active-link" : "")
+              }
+            >
+              Sign Out
+            </NavLink>
+          ) : (
+            <NavLink
+              key={isLoggedIn}
+              onClick={() => setIsNavOpen(false)}
+              to={`/login`}
+              className={({ isActive }) =>
+                "nav-link" + (isActive ? " active-link" : "")
+              }
+            >
+              Login
+            </NavLink>
+          )}
         </ul>
       </nav>
     </header>

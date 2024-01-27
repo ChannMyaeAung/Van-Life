@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { auth } from "../api";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
@@ -32,19 +32,19 @@ const Signout = () => {
   return (
     <div className={`${styles.flexColumnCenter} gap-3`}>
       {authUser ? (
-        <>
+        <Fragment>
           <p className="text-[32px] font-semibold">{`Sign In as ${authUser.email}`}</p>
           <button className={`${styles.button}`} onClick={userSignOut}>
             Sign Out
           </button>
-        </>
+        </Fragment>
       ) : (
-        <>
-          <p className="text-[32px] font-semibold">Signed Out</p>
+        <Fragment>
+          <p className="text-[32px] font-semibold">Signed out successfully.</p>
           <NavLink to={`/login`} className={`${styles.button}`}>
             Sign In
           </NavLink>
-        </>
+        </Fragment>
       )}
     </div>
   );

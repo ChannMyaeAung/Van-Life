@@ -56,18 +56,3 @@ export async function getHostVans() {
 
   return dataArr;
 }
-
-export async function loginUser(email, password) {
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    return { user: userCredential.user };
-  } catch (err) {
-    console.log("Authentication failed: ", err);
-    throw { message: "Authentication failed" };
-  }
-}
